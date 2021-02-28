@@ -1,0 +1,76 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Taksa>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+    .pagination{
+        float:right;
+        margin-bottom:78px;
+    }
+</style>
+@foreach (var data in Model.Data)
+{
+    <ul class="list-group mt-1 p-1" id="@data.Id">
+        <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
+            @data.Pershkrimin
+            <div>
+               
+                <a onclick="DeleteTaksa('@Url.Action("DeleteConfirmed","Taksas",new { id=data.Id})',@data.Id)"><span class="material-icons text-danger">delete</span></a>
+            </div>
+
+        </li>
+
+    </ul>
+}
+
+
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>
+<script>
+        function DeleteTaksa(url,id) {
+
+
+           $.ajax(url, {
+               type: 'POST',
+
+               success: function (data, status, xhr) {
+                   $("#"+id).remove();
+               },
+               error: function (jqXhr, textStatus, errorMessage) {
+                   alert("Dicka shkoi gabim. kontaktoni suportin!")
+               }
+           });
+        }
+         function EditTaksa(url,result) {
+
+
+           $.ajax(url, {
+               type: 'POST',
+
+               success: function (data, status, xhr) {
+                   $(result).parent().parent().parent().html(data);
+               },
+               error: function (jqXhr, textStatus, errorMessage) {
+                   alert("Dicka shkoi gabim. kontaktoni suportin!")
+               }
+           });
+       }
+</script>
+
+
+
+

@@ -1,0 +1,35 @@
+﻿@model BashkiaRaporton.Models.TaksaVlera
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Vlera" class="control-label"></label>
+                <input asp-for="Vlera" class="form-control" />
+                <span asp-validation-for="Vlera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BashkiaId" class="control-label"></label>
+                <select asp-for="BashkiaId" class="form-control" asp-items="ViewBag.BashkiaId"></select>
+                <span asp-validation-for="BashkiaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaksaId" class="control-label"></label>
+                <select asp-for="TaksaId" class="form-control" asp-items="ViewBag.TaksaId"></select>
+                <span asp-validation-for="TaksaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

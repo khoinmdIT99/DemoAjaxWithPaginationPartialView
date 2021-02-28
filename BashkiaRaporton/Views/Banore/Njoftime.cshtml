@@ -1,0 +1,81 @@
+﻿@model BashkiaRaporton.Models.Njoftime
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+<ol class="breadcrumb">
+
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home"><span class="material-icons">home</span>Kryefaqe</a></li>
+    <li class="breadcrumb-item active">Njoftimet e mia</li>
+</ol>
+
+<div class="col-12 row justify-content-between">
+    <div class="col-md-6">
+        <input type="search" class="form-control col-md-10" id="search" placeholder="Kerko Njoftime" />
+    </div>
+
+</div>
+<ul class="list-group mt-2">
+    <li class="list-group-item text-white bg-secondary">
+        <div class="row">
+            <div class="col-md-6">
+                <span class="material-icons">chat</span>   Mesazhi
+            </div>
+            <div class="col-md-3">
+                <span class="material-icons">date_range</span>   Data e Dergimit
+            </div>
+            <div class="col-md-3">
+                <span class="material-icons">remove_red_eye</span>  Shikushmeria
+            </div>
+        </div>
+
+    </li>
+
+</ul>
+<div class="njoftime">
+
+</div>
+@section Scripts
+{
+    <script>
+    $.urlParam = function (name, url) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(url);
+        if (results == null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    }
+    function getUsers(page, search) {
+        $(".njoftime").html('loading...');
+                $.ajax({
+                    url: "@Url.Action("NjoftimePartial", "Banore")?search=" + search + "&pageNumber=" + page ,
+                    success: function (result) {
+
+                        $(".njoftime").html(result);
+                            $(".page-link").click(function (e) {
+                                e.preventDefault();
+                                var hrefUrl = $(this).attr("href");
+                                getUsers($.urlParam('pageNumber', hrefUrl), search);
+                            });
+                        }
+                    });
+    }
+    $(document).ready(function () {
+
+        getUsers(1, "");
+    });
+
+    $("#search").keyup(function () {
+        if ($(this).val().length > 1) {
+            getUsers(1, $(this).val());
+        }
+        else if ($(this).val().length == 0) {
+            getUsers(1, "");
+        }
+    });
+
+    </script>
+}

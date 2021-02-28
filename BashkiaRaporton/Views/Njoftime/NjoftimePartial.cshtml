@@ -1,0 +1,49 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Njoftime>
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+
+@foreach (var nj in Model.Data)
+{
+    <ul class="list-group mt-1">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-3">
+                    @nj.Mesazhi
+                </div>
+                <div class="col-md-3">
+                    @nj.DataDergimit
+                </div>
+
+                <div class="col-md-3">
+                    @nj.Banore.Email
+                </div>
+                <div class="col-md-3">
+                    @if (nj.Statusi == false)
+                    {
+                        <p class="text-white badge badge-info"><span class="material-icons"> done</span>Delivered</p>
+                    }
+                    else
+                    {
+                        <p class="text-white badge badge-success"><span class="material-icons"> done_all</span>Seen</p>
+                    }
+                </div>
+
+            </div>
+
+        </li>
+
+    </ul>
+}
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>

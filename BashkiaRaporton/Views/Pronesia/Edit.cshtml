@@ -1,0 +1,41 @@
+﻿@model BashkiaRaporton.Models.Pronesia
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Ndertesa" class="control-label"></label>
+                <input asp-for="Ndertesa" class="form-control" />
+                <span asp-validation-for="Ndertesa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TokaBujqesore" class="control-label"></label>
+                <input asp-for="TokaBujqesore" class="form-control" />
+                <span asp-validation-for="TokaBujqesore" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Trualli</label>
+                <input asp-for="Titulli" class="form-control" />
+                <span asp-validation-for="Titulli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Banori</label>
+                <select asp-for="BanoreId" class="form-control" asp-items="ViewBag.BanoreId"></select>
+                <span asp-validation-for="BanoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

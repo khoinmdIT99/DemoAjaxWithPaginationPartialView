@@ -1,0 +1,27 @@
+﻿@model BashkiaRaporton.Models.Taksa
+
+<ul class="list-group mt-2" id="@Model.Id">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <input type="text" id="pershkimi" class="form-control col-6" value="@Model.Pershkrimin" />
+        <a onclick="EditSaveTaksa('@Url.Action("EditTaksa","Taksas",new { id=Model.Id})',this)"><span class="material-icons text-danger">done</span></a>
+    </li>
+
+</ul>
+<script>
+    function EditSaveTaksa(url, result) {
+        var pershkrimi = $("#pershkimi").val();
+
+        $.ajax(url, {
+            type: 'POST',
+            data:{ id:@Model.Id , Pershkrimin: pershkrimi},
+            success: function (data, status, xhr) {
+
+               
+                $(result).parent().parent().parent().html(data);
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

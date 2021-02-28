@@ -1,0 +1,116 @@
+﻿@model BashkiaRaporton.ViewModel.Dashboard
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+@if (Model.Banores.Count() != 0)
+{
+<div class="row">
+    <div class="col-3 p-3 text-center">
+        <h3 >
+            <span class="material-icons">
+                account_balance
+            </span>
+        </h3>
+        <h2>@Model.Bashkia.Emri</h2>
+    </div>
+    @foreach (var v in Model.njesiaAdministratives)
+    {
+        <div class="col-md-3 p-3 col-lg-3 col-sm-12 ">
+            <div class="card flex-row  flex-wrap">
+                <div class="card-header  bg-secondary">
+                    <h2>
+                        <span class="material-icons font text-white">
+                            domain
+                        </span>
+                    </h2>
+                </div>
+                <div class="card-block px-2">
+                    <p class="card-text  text-center pl-5 text-dark">@v.Emri</p>
+
+                    <h4 class="card-title pl-4 ml-5 text-dark">@Njesia.NrBanoresipasnjesise(context, v.Id)</h4>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-12 mt-5">
+    <div class="card">
+        <div class="card-header text-center">
+            <a class="btn btn-link" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Lista e Banoreve me detyrime
+            </a>
+           
+        </div>
+        <ul class="list-group list-group-flush collapse show" id="collapseExample">
+            @foreach (var banore in Model.Banores)
+            {
+                <li class="list-group-item">
+                    <div class="row justify-content-between">
+                        <div class=" col-3">
+                            <p class="pl-3">@banore.Email</p>
+                        </div>
+                        <div class="col-2 text-center offset-6">
+                            <a onclick="Display('@Url.Action("Create", "Njoftime", new { banoreid = banore.Id })')" class="material-icons badge badge-warning text-white">chat</a>
+                        </div>
+                    </div>
+
+
+
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<div class="col-8 offset-2">
+    <canvas class="mt-5 col-12" id="myChart"></canvas>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                Krijo njoftim per banorin
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+}
+else
+{
+<div class="alert alert-danger text-center" role="alert">
+   Ju nuk keni asnje konfigurim per bashkine qe keni instaluar sistemin <b>Bashkia Raporton</b>
+</div>
+}
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: ['Janar', 'Shkurt', 'Mars', 'Prill', 'Qershor', 'Korrik', 'Gusht', 'Shtator', 'Tetor', 'Nentor', 'Dhjetor'],
+            datasets: [{
+                label: 'Te ardhurat nga taksat e bashkise',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [@Model.Janar,@Model.Shkurt,@Model.Mars,@Model.Prill,@Model.Maj,@Model.Qershor,@Model.Korrik,@Model.Gusht,@Model.Shtator,@Model.Tetor,@Model.Nentor,@Model.Dhjetor,]
+            }]
+        },
+
+        // Configuration options go here
+        options: {}
+    });
+</script>

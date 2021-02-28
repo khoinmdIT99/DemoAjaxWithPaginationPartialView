@@ -1,0 +1,79 @@
+﻿@model BashkiaRaporton.Models.Bashkia
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (Model.Id == 0)
+{
+    <a class="btn btn-success text-white mb-4" onclick="Display('@Url.Action("Create" ,"Bashkias")')">Konfiguroni bashkine tuaj<span class="material-icons">create</span></a>
+}
+else
+{
+    <a class="btn btn-success text-white mb-4" onclick="Display('@Url.Action("Edit" ,"Bashkias", new { id=Model.Id})')">Konfiguroni bashkine tuaj<span class="material-icons">create</span></a>
+}
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Emri)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmriKryetarit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Popullsia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Siperfaqja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pershkrimi)
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+       
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Emri)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.EmriKryetarit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Posta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Popullsia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Siperfaqja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Pershkrimi)
+                </td>
+               
+            </tr>
+       
+    </tbody>
+</table>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+                Konfiguroni bashkine tuaj
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>

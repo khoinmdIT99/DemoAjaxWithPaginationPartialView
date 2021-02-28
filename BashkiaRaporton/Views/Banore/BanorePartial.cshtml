@@ -1,0 +1,56 @@
+﻿
+@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Banore>
+
+@foreach (var banore in Model.Data)
+{
+    <partial name="Banori" model="banore" />
+}
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>
+
+
+<script>
+    function Delete(url, result) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                $(result).parents(".delete").remove();
+               
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+    function Edit(url,Id) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                $("#banore-" + Id).html(data);
+
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+   
+</script>

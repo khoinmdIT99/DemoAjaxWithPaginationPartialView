@@ -1,0 +1,78 @@
+﻿
+@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Fatura>
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+
+@foreach (var sasia in Model.Data)
+{
+<div class="row border delete mt-2 mr-2 ml-2">
+    <div class="col-3 p-2">
+        @sasia.Sasia
+    </div>
+    <div class="col-3 p-2">
+        @sasia.Banore.Emri
+    </div>
+    <div class="col-3 p-2">
+        @sasia.Date
+    </div>
+    <div class="col-1 p-2">
+        <input onchange="UpdatePagesa('@Url.Action("UpdatePagesa","Faturas"  , new { id=sasia.Id})',this )" 
+               @Njesia.Checked(context,sasia.Id) asp-for="@sasia.Paguar"
+               type="checkbox"
+               value="@sasia.Paguar" />
+
+    </div>
+    <div class="col-1 p-2">
+        <a onclick="Display('@Url.Action("Edit","Faturas"  , new { id=sasia.Id})')" class="material-icons badge badge-primary text-white">create</a>
+    </div>
+    <div class="col-1 p-2">
+        <a onclick="Delete('@Url.Action("DeleteConfirmed","Faturas"  , new { id=sasia.Id})',this)" class="material-icons badge badge-danger text-white">delete</a>
+    </div>
+
+
+
+</div>
+}
+
+
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>
+<script>
+    function Delete(url, result) {
+        $.ajax(url, {
+            type: 'POST',
+            success: function (data, status, xhr) {
+                $(result).parents(".delete").remove();
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+
+    function UpdatePagesa(url, result) {
+        $.ajax(url, {
+            type: 'POST',
+            data:{checked : result.checked },
+            success: function (data, status, xhr) {
+                location.reload();
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+
+
+</script>

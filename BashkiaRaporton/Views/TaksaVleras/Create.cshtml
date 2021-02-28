@@ -1,0 +1,32 @@
+﻿@model BashkiaRaporton.Models.TaksaVlera
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Vlera" class="control-label"></label>
+                <input asp-for="Vlera" class="form-control" />
+                <span asp-validation-for="Vlera" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BashkiaId" class="control-label"></label>
+                <select asp-for="BashkiaId" class ="form-control" asp-items="ViewBag.BashkiaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaksaId" class="control-label"></label>
+                <select asp-for="TaksaId" class ="form-control" asp-items="ViewBag.TaksaId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

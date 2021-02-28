@@ -1,0 +1,27 @@
+﻿@model BashkiaRaporton.ViewModel.RoleViewModel
+@{ 
+    Layout = null;
+}
+
+<div >
+    <label>Shto Role </label>
+    <input asp-for="RoleName" onchange="AddRole('@Url.Action("SaveRole","Banore")',this)" class="form-control"/>
+    
+</div>
+
+<script>
+    function AddRole(url, result) {
+        var rolename = $(result).val();
+
+           $.ajax(url, {
+               type: 'POST',
+               data: { RoleName: rolename},
+               success: function (data, status, xhr) {
+                   location.reload(true);
+               },
+               error: function (jqXhr, textStatus, errorMessage) {
+
+               }
+           });
+       }
+</script>

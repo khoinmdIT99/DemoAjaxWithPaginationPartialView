@@ -1,0 +1,116 @@
+﻿@model IEnumerable<BashkiaRaporton.Models.Banore>
+<link href="~/css/site.css" rel="stylesheet" />
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+<ol class="breadcrumb">
+
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home"><span class="material-icons">home</span>Kryefaqe</a></li>
+    <li class="breadcrumb-item active">Banore</li>
+</ol>
+
+<div class="col-12 row justify-content-between">
+    <div class="col-md-6">
+        <input type="search" class="form-control col-md-10" id="search" placeholder="Kerko Banore" />
+    </div>
+    <div class="col-md-6 row justify-content-between">
+        <a class="nav-link col-3  mb-3  btn btn-warning text-white" onclick="Display('@Url.Action("Role","Banore")')">Shto Role<span class="material-icons">add_circle_outline</span></a>
+
+        <a class="nav-link col-6  mb-3  btn btn-primary text-white" asp-area="Identity" asp-page="/Account/Register">Regjistro Banore<span class="material-icons">add_circle_outline</span></a>
+    </div>
+</div>
+<div class="row  mr-2 ml-2 bg-secondary text-white border">
+    <div class="col-1 font-weight-bold p-2">
+        <span class="material-icons">person</span>Emri
+    </div>
+    <div class="col-1 font-weight-bold p-2">
+        <span class="material-icons">person</span>Mbiemri
+    </div>
+    <div class="col-3 font-weight-bold p-2">
+        <span class="material-icons">email</span>Email
+    </div>
+    <div class="col-1 font-weight-bold p-2">
+        <span class="material-icons">email</span>Telefoni
+    </div>
+    <div class="col-1 font-weight-bold text-center p-2">
+        Detyrime
+    </div>
+    <div class="col-2 font-weight-bold text-center p-2">
+        <span class="material-icons">
+            admin_panel_settings</span>Roli
+    </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col-1">
+
+    </div>
+    <div class="col-1">
+
+    </div>
+
+
+
+
+</div>
+<div class="Banore">
+
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+               
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+    $.urlParam = function (name, url) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(url);
+        if (results == null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    }
+    function getUsers(page, search) {
+        $(".Banore").html('loading...');
+                $.ajax({
+                    url: "@Url.Action("BanorePartial", "Banore")?search=" + search + "&pageNumber=" + page ,
+                    success: function (result) {
+
+                        $(".Banore").html(result);
+                            $(".page-link").click(function (e) {
+                                e.preventDefault();
+                                var hrefUrl = $(this).attr("href");
+                                getUsers($.urlParam('pageNumber', hrefUrl), search);
+                            });
+                        }
+                    });
+    }
+    $(document).ready(function () {
+
+        getUsers(1, "");
+    });
+
+    $("#search").keyup(function () {
+        if ($(this).val().length > 1) {
+            getUsers(1, $(this).val());
+        }
+        else if ($(this).val().length == 0) {
+            getUsers(1, "");
+        }
+    });
+    </script>
+}

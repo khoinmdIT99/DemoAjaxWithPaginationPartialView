@@ -1,0 +1,102 @@
+﻿@model IEnumerable<BashkiaRaporton.Models.Pronesia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+<div class="col-12 row justify-content-between">
+    <div class="col-md-6">
+        <input type="search" class="form-control col-md-10" id="search" placeholder="Kerko Pronesi sipas banorit" />
+    </div>
+    <div class="col-md-6">
+
+
+        <a onclick="Display('@Url.Action("Create" ,"Pronesia")')" class="nav-link col-4 float-right mb-3  btn btn-primary text-white">Shto Pronesi<span class="material-icons">add_circle_outline</span></a>
+    </div>
+</div>
+
+<div class="row border delete mr-2 ml-2">
+    <div class="col-3 p-2">
+        Ndertesa
+    </div>
+    <div class="col-3 p-2">
+        TokaBujqesore 
+    </div>
+    <div class="col-2 p-2">
+        Trualli
+    </div>
+    <div class="col-2 p-2">
+       Banori
+    </div>
+    <div class="col-1 p-2">
+      
+    </div>
+    <div class="col-1 p-2">
+        
+    </div>
+
+</div>
+<div class="prona">
+
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="card-header">
+               
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+    $.urlParam = function (name, url) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(url);
+        if (results == null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    }
+    function getUsers(page, search) {
+        $(".prona").html('loading...');
+                $.ajax({
+                    url: "@Url.Action("IndexPartail", "Pronesia")?search=" + search + "&pageNumber=" + page ,
+                    success: function (result) {
+
+                        $(".prona").html(result);
+                            $(".page-link").click(function (e) {
+                                e.preventDefault();
+                                var hrefUrl = $(this).attr("href");
+                                getUsers($.urlParam('pageNumber', hrefUrl), search);
+                            });
+                        }
+                    });
+    }
+    $(document).ready(function () {
+
+        getUsers(1, "");
+    });
+
+    $("#search").keyup(function () {
+        if ($(this).val().length > 1) {
+            getUsers(1, $(this).val());
+        }
+        else if ($(this).val().length == 0) {
+            getUsers(1, "");
+        }
+    });
+        
+    </script>
+}

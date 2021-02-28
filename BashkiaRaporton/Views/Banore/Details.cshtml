@@ -1,0 +1,37 @@
+﻿@model BashkiaRaporton.Models.Banore
+@{
+    Layout = null;
+}
+
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">Emri</label>
+    <div class="col-sm-8">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@Model.Email">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">Mbiemri</label>
+    <div class="col-sm-8">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@Model.Mbiemri">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">Email</label>
+    <div class="col-sm-8">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@Model.Email">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">NjesiaAdministrative</label>
+    <div class="col-sm-8">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@Model.NjesiaAdministrative.Emri">
+    </div>
+</div>
+<div class="mb-3 row">
+    <label for="staticEmail" class="col-sm-4 col-form-label">Status</label>
+    <div class="col-sm-8">
+        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="@Model.Status.Statusi">
+    </div>
+</div>
+
+

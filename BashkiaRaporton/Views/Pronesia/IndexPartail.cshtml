@@ -1,0 +1,53 @@
+﻿
+@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Pronesia>
+@foreach (var prona in Model.Data)
+{
+<div class="row border delete mr-2 ml-2">
+    <div class="col-3 p-2">
+        @prona.Ndertesa meter  katrore
+    </div>
+    <div class="col-3 p-2">
+        @prona.TokaBujqesore meter katrore
+    </div>
+    <div class="col-2 p-2">
+        @prona.Titulli meter katrore
+    </div>
+    <div class="col-2 p-2">
+        @prona.Banore.Emri
+    </div>
+    <div class="col-1 p-2">
+        <a onclick="Display('@Url.Action("Edit","Pronesia"  , new { id=prona.Id})')" class="material-icons badge badge-primary text-white">create</a>
+    </div>
+    <div class="col-1 p-2">
+        <a onclick="Delete('@Url.Action("DeleteConfirmed","Pronesia"  , new { id=prona.Id})',this)" class="material-icons badge badge-danger text-white">delete</a>
+    </div>
+  
+</div>
+}
+
+
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>
+<script>
+    function Delete(url, result) {
+        $.ajax(url, {
+            type: 'POST',
+            success: function (data, status, xhr) {
+                $(result).parents(".delete").remove();
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

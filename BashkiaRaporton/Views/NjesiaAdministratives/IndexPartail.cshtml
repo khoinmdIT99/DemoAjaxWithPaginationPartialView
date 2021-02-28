@@ -1,0 +1,65 @@
+﻿@model BashkiaRaporton.Models.NjesiaAdministrative
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+
+
+
+
+
+
+
+
+<div class="col-md-3 p-1">
+    <div class="card " id="@Model.Id">
+        <div class="card-header ">
+
+            <a onclick="EditNjesi('@Url.Action("Edit","NjesiaAdministratives",new { id=Model.Id})',this)"><span class="material-icons  text-primary">create</span></a>
+            <a onclick="DeleteNjesi('@Url.Action("DeleteConfirmed","NjesiaAdministratives",new { id=Model.Id})',this)"><span class="material-icons text-danger">delete</span></a>
+
+
+        </div>
+        <div class="card-body">
+            <h1 class="display-2 text-center"><span class="material-icons">location_city</span></h1>
+            <h5 class="card-title text-center">@Model.Emri</h5>
+            <h6 class="text-center"><span class="badge badge-primary text-center">@Njesia.NrBanoresipasnjesise(context, Model.Id)</span></h6>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function DeleteNjesi(url, result) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                $("#@Model.Id").remove();
+                
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+    function EditNjesi(url, result) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                alert(data);
+                $(result).parents(".delete").html(data);
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

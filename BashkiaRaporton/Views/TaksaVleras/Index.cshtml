@@ -1,0 +1,103 @@
+﻿@model IEnumerable<BashkiaRaporton.Models.TaksaVlera>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+
+
+<ol class="breadcrumb">
+
+    <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home"><span class="material-icons">home</span>Kryefaqe</a></li>
+    <li class="breadcrumb-item active">Banore</li>
+</ol>
+
+<div class="col-12 row justify-content-between">
+    <div class="col-md-6">
+        <input type="text" class="form-control col-md-10" id="search" placeholder="Kerko Takse" />
+    </div>
+    <div class="col-md-6">
+
+
+        <a class="nav-link col-6 float-right mb-3  btn btn-primary text-white" onclick="Display('@Url.Action("Create" ,"TaksaVleras")')">Regjistro Vleren e Takses<span class="material-icons">add_circle_outline</span></a>
+    </div>
+</div>
+<div class="row ml-2 mr-2  border mt-2">
+    <div class="col-3  p-2">
+       Pershkrimin
+    </div>
+    <div class="col-3  p-2">
+      Bashkia
+    </div>
+    <div class="col-3  p-2">
+      Vlera
+    </div>
+   
+    <div class="col-1 p-2">
+       </div>
+    </div>
+    <div class="vlera">
+
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="card-header">
+
+                </div>
+                <div class="modal-body">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @section Scripts
+{
+        <script>
+    $.urlParam = function (name, url) {
+        var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(url);
+        if (results == null) {
+            return null;
+        }
+        return decodeURI(results[1]) || 0;
+    }
+    function getUsers(page, search) {
+        $(".vlera").html('loading...');
+                $.ajax({
+                    url: "@Url.Action("IndexPartail", "TaksaVleras")?search=" + search + "&pageNumber=" + page ,
+                    success: function (result) {
+
+                        $(".vlera").html(result);
+                            $(".page-link").click(function (e) {
+                                e.preventDefault();
+                                var hrefUrl = $(this).attr("href");
+                                getUsers($.urlParam('pageNumber', hrefUrl), search);
+                            });
+                        }
+                    });
+    }
+    $(document).ready(function () {
+
+        getUsers(1, "");
+    });
+
+    $("#search").keyup(function () {
+        if ($(this).val().length > 1) {
+            getUsers(1, $(this).val());
+        }
+        else if ($(this).val().length == 0) {
+            getUsers(1, "");
+        }
+    });
+
+        </script>
+    }

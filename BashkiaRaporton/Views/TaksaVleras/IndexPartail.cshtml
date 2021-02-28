@@ -1,0 +1,56 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.TaksaVlera>
+@foreach (var taksa in Model.Data)
+{
+    <div class="row ml-2 mr-2 delete border mt-2" id="taksa-@taksa.Id">
+        <div class="col-3  p-2">
+            @taksa.Taksa.Pershkrimin
+        </div>
+        <div class="col-3  p-2">
+            @taksa.Bashkia.Emri
+        </div>
+        <div class="col-3  p-2">
+            @taksa.Vlera
+        </div>
+       
+        <div class="col-1 p-2">
+            <a onclick="Display('@Url.Action("Edit","TaksaVleras"  , new { Id=taksa.Id})')" class="material-icons badge badge-primary text-white">create</a>
+        </div>
+        <div class="col-1 p-2">
+            <a onclick="DeletetakseVlera('@Url.Action("DeleteConfirmed","TaksaVleras"  , new { Id=taksa.Id})',this)" class="material-icons badge badge-danger text-white">delete</a>
+        </div>
+
+
+
+    </div>
+}
+
+<cs-pager cs-paging-pagenumber=Model.PageNumber
+          cs-paging-totalitems=Model.TotalItems
+          cs-paging-pagesize=Model.PageSize
+          cs-pagenumber-param="pageNumber"
+          cs-pager-li-current-class="page-item active"
+          cs-pager-li-other-class="page-item"
+          cs-pager-li-non-active-class="page-item disabled"
+          cs-pager-link-current-class="page-link"
+          cs-pager-link-other-class="page-link"
+          cs-paging-maxpageritems="3">
+
+</cs-pager>
+<script>
+     function DeletetakseVlera(url, result) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                $(result).parents(".delete").remove();
+
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

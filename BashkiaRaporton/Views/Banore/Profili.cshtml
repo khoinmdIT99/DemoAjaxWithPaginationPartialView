@@ -1,0 +1,66 @@
+﻿@model BashkiaRaporton.Models.Pronesia
+<style>
+    .material-icons {
+        font-size: inherit;
+        top: 2px;
+        position: relative;
+    }
+</style>
+@if(Model != null)
+{
+    <div class="col-8 offset-2 ">
+        <div class="card text-dark  shadow mb-3">
+            <div class="card-header text-dark">Profili im</div>
+            <div class="card-body">
+
+                <div class="mb-3 row">
+                    <label class="col-sm-4 col-form-label text-dark">
+                        <span class="material-icons text-dark">email</span>Emri
+                    </label>
+                    <div class="col-sm-8">
+                        @Model.Banore.Emri
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label text-dark"> <span class="material-icons text-dark">email</span>Mbiemri</label>
+                    <div class="col-sm-8">
+                        @Model.Banore.Mbiemri
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label text-dark"> <span class="material-icons text-dark">email</span>Email</label>
+                    <div class="col-sm-8">
+                        @Model.Banore.Email
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label text-dark"> <span class="material-icons text-dark">email</span>Ndertesa</label>
+                    <div class="col-sm-8">
+                        @Model.Ndertesa
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label text-dark"> <span class="material-icons text-dark">email</span>Trualli</label>
+                    <div class="col-sm-8">
+                        @Model.Titulli
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="staticEmail" class="col-sm-4 col-form-label text-dark"> <span class="material-icons text-dark">email</span>TokaBujqesore</label>
+                    <div class="col-sm-8">
+                        @Model.TokaBujqesore
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+<div class="alert alert-danger text-center" role="alert">
+   Nuk ka te dhena  per kete banore!
+</div>
+}
+

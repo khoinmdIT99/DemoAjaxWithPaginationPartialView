@@ -1,0 +1,43 @@
+﻿@model BashkiaRaporton.Models.Njoftime
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+<h4 class="text-dark"></h4>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
+            <div class="form-group">
+                <label asp-for="Mesazhi" class="control-label"></label>
+                <input asp-for="Mesazhi" id="mesazhi" class="form-control" />
+                <span asp-validation-for="Mesazhi" class="text-danger"></span>
+            </div>
+           <input type="hidden" asp-for="BanoreId" value="@ViewBag.BanoreId" />
+            
+           
+        </form>
+    </div>
+</div>
+<script>
+    $("#mesazhi").on("change", function () {
+        debugger
+        var mesazhi = $("#mesazhi").val();
+        var banoreid = $("#BanoreId").val();
+        var url = '@Url.Action("CreateNJoftime", "Njoftime")';
+        $.ajax(url, {
+            type: 'POST',
+            data: { Mesazhi: mesazhi, BanoreId: banoreid},
+            success: function (data, status, xhr) {
+                location.reload();
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    });
+</script>
+

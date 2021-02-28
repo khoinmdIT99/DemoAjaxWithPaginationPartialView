@@ -1,0 +1,48 @@
+﻿@model BashkiaRaporton.Models.Banore
+
+
+  
+        <div class="col-12">
+            <label>Emri</label>
+            <input type="text" id="emri" class="form-control" value="@Model.Emri"/>
+        </div>
+        <div class="col-12">
+            <label>Mbiemri</label>
+            <input type="text" id="mbiemri" class="form-control" value="@Model.Mbiemri" />
+        </div>
+        <div class="col-12">
+            <label>Email</label>
+            <input type="email" id="email" class="form-control" value="@Model.Email" />
+        </div>
+        <div class="col-12">
+            <label>Telefoni</label>
+            <input type="text" id="phonenumber" class="form-control" value="@Model.PhoneNumber" />
+        </div>
+
+            <a onclick="Save('@Url.Action("Save","Banore")')" class="btn btn-success mt-2 text-white">Edito Banore</a>
+        
+
+
+   
+
+    <script>
+        
+    function Save(url) {
+        var emri = $("#emri").val();
+        var mbiemri = $("#mbiemri").val();
+        var email = $("#email").val();
+        var phonenumber = $("#phonenumber").val();
+
+        $.ajax(url, {
+            type: 'POST',
+            data :{ Id:'@Model.Id' , PhoneNumber: phonenumber, Emri: emri, Mbiemri: mbiemri, Email: email},
+            success: function (data) {
+                location.reload();
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+    </script>

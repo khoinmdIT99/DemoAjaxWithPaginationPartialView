@@ -1,0 +1,75 @@
+﻿@model BashkiaRaporton.Models.Pronesia
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+
+}
+
+<h1>Create</h1>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ndertesa" class="control-label"></label>
+                <input asp-for="Ndertesa" class="form-control" />
+                <span id="errorndertesa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TokaBujqesore" class="control-label"></label>
+                <input asp-for="TokaBujqesore" class="form-control" />
+                <span id="errortoke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label  class="control-label">Trualli</label>
+                <input asp-for="Titulli" class="form-control" />
+                <span id="errortrualli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BanoreId" class="control-label"></label>
+                <select asp-for="BanoreId" class ="form-control" asp-items="ViewBag.BanoreId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="pronesia" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    $("#pronesia").on("click", function () {
+        var ndertesa = $("#Ndertesa").val();
+        var toke = $("#TokaBujqesore").val();
+        var trualli = $("#Titulli").val();
+        var banori = $("#BanoreId").val();
+        if (ndertesa == null || ndertesa == "") {
+            event.preventDefault();
+            $("#Ndertesa").css({ "border-color": "red", "border-style": " 2px solid" });
+            $("#errorndertesa").html("Fusha Ndertesa eshte e detyrushme");
+
+        }
+        if (toke == null || toke == "") {
+            event.preventDefault();
+            $("#TokaBujqesore").css({ "border-color": "red", "border-style": " 2px solid" });
+            $("#errortoke").html("Fusha TokeBujqesore eshte e detyrushme");
+
+        }
+        if (trualli == null || trualli == "") {
+            event.preventDefault();
+            $("#Titulli").css({ "border-color": "red", "border-style": " 2px solid" });
+            $("#errortrualli").html("Fusha Trualli eshte e detyrushme");
+
+        }
+        if (banori == null || banori == "") {
+            event.preventDefault();
+            $("#BanoreId").css({ "border-color": "red", "border-style": " 2px solid" });
+
+        }
+
+    });
+</script>
+

@@ -1,0 +1,51 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.Njoftime>
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+
+@foreach (var nj in Model.Data)
+{
+    <ul class="list-group mt-1">
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col-md-6">
+                    @nj.Mesazhi
+                </div>
+                <div class="col-md-3">
+                    @nj.DataDergimit
+                </div>
+                <div class="col-md-3">
+                    @if (nj.Shikushmeria == true)
+                    {
+                        <p>Njoftim i vjeter</p>
+                    }
+                    else
+                    {
+                        <input onchange="UpdateNjoftime('@Url.Action("UpdateNjoftime","Njoftime"  , new { id=nj.NjoftimeId})',this )"
+                               @Njesia.CheckedNjoftime(context, nj.NjoftimeId) asp-for="@nj.Shikushmeria"
+                               type="checkbox"
+                               value="@nj.Shikushmeria" />
+                    }
+
+                </div>
+
+            </div>
+
+        </li>
+
+    </ul>
+}
+<script>
+    function UpdateNjoftime(url, result) {
+        $.ajax(url, {
+            type: 'POST',
+            data: { checked: result.checked },
+            success: function (data, status, xhr) {
+                location.reload();
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

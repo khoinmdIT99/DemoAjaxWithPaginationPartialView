@@ -1,0 +1,41 @@
+﻿@model BashkiaRaporton.Models.NjesiaAdministrative
+@{
+    Layout = null;
+}
+<div class=" col-md-12">
+    @*<div class="col-5">
+        <label>Njesia</label>
+        <input type="text" id="emri" value="@Model.Emri" class="form-control" />
+    </div>*@
+    <div class="form-group">
+        <label for="exampleInputEmail1">Njesia</label>
+        <input type="text" class="form-control" id="emri" value="@Model.Emri">
+       
+    </div>
+    <div class="form-group">
+        <label>Bashkia</label>
+        <select asp-for="BashkiaId" asp-items="ViewBag.BashkiaId" class="form-control"></select>
+    </div>
+   
+       
+        <a class="btn btn-success  text-white" onclick="EditSaveNjesi('@Url.Action("EditNjesi","NjesiaAdministratives")',this)">Edito Njesine</a>
+    
+</div>
+<script>
+    function EditSaveNjesi(url, result) {
+        var emri = $("#emri").val();
+
+        $.ajax(url, {
+            type: 'POST',
+            data: { id:@Model.Id , Emri: emri, BashkiaId:@Model.BashkiaId},
+            success: function (data, status, xhr) {
+
+
+                location.reload(true); 
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim. kontaktoni suportin!")
+            }
+        });
+    }
+</script>

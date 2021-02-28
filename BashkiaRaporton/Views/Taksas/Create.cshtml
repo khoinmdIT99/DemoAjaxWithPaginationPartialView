@@ -1,0 +1,44 @@
+﻿@model BashkiaRaporton.Models.Taksa
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+<h3>Krijo Takse</h3>
+<div class="row mt-4">
+    <div class="col-md-12">
+      
+           
+            <div class="form-group">
+                <label class="control-label">Pershkrimin</label>
+                <input onchange="AddTaksa()" id="Pershkrimin" class="form-control col-12" />
+                
+            </div>
+            
+      
+    </div>
+</div>
+<br />
+
+
+
+   <script>
+       function AddTaksa() {
+           var Pershkrimin = $("#Pershkrimin").val();
+          
+           $.ajax('@Url.Action("CreateTaksa", "Taksas")', {
+               type: 'POST', 
+               data: { Pershkrimin: Pershkrimin }, 
+               success: function (data, status, xhr) {
+                   location.reload(true);
+               },
+               error: function (jqXhr, textStatus, errorMessage) {
+                  
+               }
+           });
+       }
+   </script>
+
+       
+   
+

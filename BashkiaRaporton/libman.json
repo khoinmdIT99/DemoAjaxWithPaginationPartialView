@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "sortable@0.8.0",
+      "destination": "wwwroot/sortable/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "bootstrap-modal@2.2.6",
+      "destination": "wwwroot/bootstrap-modal/"
+    }
+  ]
+}

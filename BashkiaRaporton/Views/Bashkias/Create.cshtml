@@ -1,0 +1,54 @@
+﻿@model BashkiaRaporton.Models.Bashkia
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = null;
+}
+
+
+<h4>Bashkia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Emri" class="control-label"></label>
+                <input asp-for="Emri" class="form-control" />
+                <span asp-validation-for="Emri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EmriKryetarit" class="control-label"></label>
+                <input asp-for="EmriKryetarit" class="form-control" />
+                <span asp-validation-for="EmriKryetarit" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Posta" class="control-label"></label>
+                <input asp-for="Posta" class="form-control" />
+                <span asp-validation-for="Posta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Popullsia" class="control-label"></label>
+                <input asp-for="Popullsia" class="form-control" />
+                <span asp-validation-for="Popullsia" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Siperfaqja" class="control-label"></label>
+                <input asp-for="Siperfaqja" class="form-control" />
+                <span asp-validation-for="Siperfaqja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pershkrimi" class="control-label"></label>
+                <input asp-for="Pershkrimi" class="form-control" />
+                <span asp-validation-for="Pershkrimi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+</script>

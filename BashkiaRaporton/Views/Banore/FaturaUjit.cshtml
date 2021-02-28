@@ -1,0 +1,88 @@
+﻿@model BashkiaRaporton.ViewModel.FaturaUjitViewModel
+    <style>
+        .material-icons {
+            font-size: inherit;
+            top: 2px;
+            position: relative;
+        }
+    </style>
+@if(Model.Faturas.Count != 0)
+{
+<div class="col-md-8 p-2 offset-2 shadow">
+    <h3 class="text-center mb-5">Fatura e Ujit</h3>
+    <div class="row  mt-2 border ml-2 mr-2">
+
+        <div class="col-3 p-2 ">
+            <span class="material-icons">calendar_today</span> Muaji
+        </div>
+        <div class="col-3 p-2">
+            <span class="material-icons">30fps_select</span>  Sasia
+        </div>
+        <div class="col-3 p-2">
+            <span class="material-icons">euro_symbol</span>   Kosto
+        </div>
+
+    </div>
+    @foreach (var e in Model.Faturas)
+    {
+        if (e.Paguar == true)
+        {
+            <div class="row border mt-2 ml-2 mr-2" style="background-color:aquamarine">
+                <div class="col-3 p-2">
+                    @e.Date.ToString("dd-MM-yyyy")
+                </div>
+                <div class="col-3 p-2">
+                    @e.Sasia
+                </div>
+                <div class="col-3 p-2">
+                    @(e.Sasia * Model.TaksaUjit)
+                </div>
+                <div class="col-3 p-2">
+                    E paguar
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row  border mt-2 ml-2 mr-2" style="background-color:indianred">
+                <div class="col-3 p-2">
+                    @e.Date.ToString("dd-MM-yyyy")
+                </div>
+                <div class="col-3 p-2">
+                    @e.Sasia
+                </div>
+                <div class="col-3 p-2">
+                    @(e.Sasia * Model.TaksaUjit)
+                </div>
+                <div class="col-3 p-2">
+                    E papaguar
+                </div>
+            </div>
+        }
+
+
+    }
+    <hr />
+    <ul style="list-style:none">
+        <li>
+            <small>Fatura e Ujit eshte nje takse qe banori e paguan cdo muaj</small>  
+        </li>
+        <li>
+            <span class="badge badge-pill badge-success">.</span><small>Faturat qe jane paguar</small>
+        </li>
+        <li>
+            <span class="badge badge-pill badge-danger">.</span><small>Faturat qe nuk jane paguar</small>
+        </li>
+    </ul>
+   
+</div>
+}
+else
+{
+<div class="alert alert-danger text-center" role="alert">
+    Nuk ka asnje fature per kete banore!
+</div>
+}
+
+
+

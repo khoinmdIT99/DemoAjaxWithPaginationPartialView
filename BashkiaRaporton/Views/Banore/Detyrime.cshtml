@@ -1,0 +1,130 @@
+﻿@model BashkiaRaporton.ViewModel.Detyrime
+
+
+
+@if(Model.Pronesia != null)
+{
+<div class="col-md-6 offset-3 shadow border small font-weight-bold">
+    <h4 class="text-center">Bashkia Raporton</h4>
+    @foreach (var t in Model.TaksaVlera)
+    {
+        if (t.Taksa.Pershkrimin.Contains("TaksaNdertesa"))
+        {
+            <div class="row p-2">
+
+
+                <div class="col-md-4 font-weight-bold">
+                    Ndertesa
+                </div>
+                <div class="col-md-2">
+                    @Model.Pronesia.Ndertesa m2
+                </div>
+                <div class="col-md-3">
+                    @Model.TaksaNdertesa per njesi
+                </div>
+                <div class="col-md-3">
+                    Shuma:   @(Model.Pronesia.Ndertesa * Model.TaksaNdertesa)
+                </div>
+
+            </div>
+        }
+        else if (t.Taksa.Pershkrimin.Contains("TaksaBujqesi"))
+        {
+            <div class="row p-2">
+
+
+                <div class="col-md-4 font-weight-bold">
+                    Toke Bujqesore
+                </div>
+                <div class="col-md-2">
+                    @Model.Pronesia.TokaBujqesore m2
+                </div>
+                <div class="col-md-3">
+                    @Model.TaksaBujqesi per njesi
+                </div>
+                <div class="col-md-3">
+                    Shuma:   @(Model.Pronesia.TokaBujqesore * Model.TaksaBujqesi)
+                </div>
+
+            </div>
+        }
+        else if (t.Taksa.Pershkrimin.Contains("TaksaeUjit"))
+        {
+            continue;
+        }
+        else if (t.Taksa.Pershkrimin.Contains("TaksaeTruallit"))
+        {
+            <div class="row p-2">
+                <div class="col-md-4 font-weight-bold">
+                    Trualli
+                </div>
+                <div class="col-md-2">
+                    @Model.Pronesia.Titulli m2
+                </div>
+                <div class="col-md-3">
+                    @Model.TaksaTraulli per njesi
+                </div>
+                <div class="col-md-3">
+                    Shuma:   @(Model.Pronesia.Titulli * Model.TaksaTraulli)
+                </div>
+
+            </div>
+        }
+
+        else
+        {
+            <div class="row  p-2">
+
+
+                <div class="col-md-4 font-weight-bold">
+                    @t.Taksa.Pershkrimin
+                </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-3">
+                    Shuma: @foreach (var p in Model.TaksaVlera)
+                    {
+                        if (t.TaksaId == p.Taksa.Id)
+                        {
+                            @p.Vlera
+                        }
+                    }
+                </div>
+
+            </div>
+        }
+    }
+    <div class="row bg-danger  p-2">
+
+
+        <div class="col-md-4">
+            
+        </div>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3 font-weight-bold">
+            Totali:  @Model.Totali
+        </div>
+
+    </div>
+
+</div>
+}
+else
+{
+<div class="alert alert-danger text-center" role="alert">
+    Ju nuk keni asnje detyrim
+</div>
+}
+
+
+
+

@@ -1,0 +1,52 @@
+﻿@model cloudscribe.Pagination.Models.PagedResult<BashkiaRaporton.Models.NjesiaAdministrative>
+@using BashkiaRaporton.Helper;
+@inject ApplicationDbContext context
+@using BashkiaRaporton.Data
+<div class="row">
+    @foreach (var njesi in Model.Data)
+    {
+        <div class="col-md-3 delete p-1">
+            <div class="card " id="@njesi.Id">
+                <div class="card-header ">
+
+                    <a onclick="Display('@Url.Action("Edit","NjesiaAdministratives",new { id=njesi.Id})', this,@njesi.Id)"><span class="material-icons  text-primary">create</span></a>
+                    @if (Njesia.NrBanoresipasnjesise(context, njesi.Id) == 0)
+                    {
+                        <a onclick="DeleteNjesi('@Url.Action("DeleteConfirmed","NjesiaAdministratives",new { id=njesi.Id})', this)"><span class="material-icons text-danger">delete</span></a>
+                    }
+
+
+                </div>
+                <div class="card-body">
+                    <h1 class="display-2 text-center"><span class="material-icons">location_city</span></h1>
+                    <h5 class="card-title text-center">@njesi.Emri</h5>
+                    <h6 class="text-center"><span class="badge badge-primary text-center">@Njesia.NrBanoresipasnjesise(context, njesi.Id)</span></h6>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<script>
+    function DeleteNjesi(url, result ,id) {
+
+
+        $.ajax(url, {
+            type: 'POST',
+
+            success: function (data, status, xhr) {
+                $(result).parents(".delete").remove();
+                console.log(result);
+                console.log($(result).parents("delete"));
+
+
+
+            },
+            error: function (jqXhr, textStatus, errorMessage) {
+                alert("Dicka shkoi gabim!")
+            }
+        });
+    }
+    
+</script>

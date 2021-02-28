@@ -1,0 +1,46 @@
+﻿@model BashkiaRaporton.Models.Njoftime
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Njoftime</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="NjoftimeId" />
+            <div class="form-group">
+                <label asp-for="BanoreId" class="control-label"></label>
+                <select asp-for="BanoreId" class="form-control" asp-items="ViewBag.BanoreId"></select>
+                <span asp-validation-for="BanoreId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mesazhi" class="control-label"></label>
+                <input asp-for="Mesazhi" class="form-control" />
+                <span asp-validation-for="Mesazhi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataDergimit" class="control-label"></label>
+                <input asp-for="DataDergimit" class="form-control" />
+                <span asp-validation-for="DataDergimit" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Shikushmeria" /> @Html.DisplayNameFor(model => model.Shikushmeria)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
